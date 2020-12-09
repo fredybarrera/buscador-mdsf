@@ -18,7 +18,7 @@
       "useLogo": false
     }
   },
-  "portalUrl": "http://esricldemo.maps.arcgis.com",
+  "portalUrl": "https://esricldemo.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [
     "mapsrv.ingenieria.esri.cl",
@@ -61,7 +61,8 @@
         },
         "version": "2.16",
         "id": "widgets_Scalebar_Widget_2",
-        "name": "Scalebar"
+        "name": "Scalebar",
+        "config": "configs/Scalebar/config_widgets_Scalebar_Widget_2.json"
       },
       {
         "uri": "widgets/Search/Widget",
@@ -72,7 +73,9 @@
         },
         "version": "2.16",
         "id": "widgets_Search_Widget_3",
-        "name": "Search"
+        "name": "Search",
+        "config": "configs/Search/config_widgets_Search_Widget_3.json",
+        "visible": false
       },
       {
         "uri": "widgets/Coordinate/Widget",
@@ -88,7 +91,7 @@
       {
         "position": {
           "left": 55,
-          "top": 45,
+          "top": 20,
           "relativeTo": "map"
         },
         "placeholderIndex": 1,
@@ -96,12 +99,12 @@
         "name": "Buscador",
         "version": "2.4",
         "closeable": true,
-        "uri": "widgets/Report/Widget"
+        "uri": "widgets/Buscador/Widget"
       },
       {
         "position": {
-          "left": 155,
-          "top": 45,
+          "left": 105,
+          "top": 20,
           "relativeTo": "map"
         },
         "placeholderIndex": 1,
@@ -112,8 +115,8 @@
       },
       {
         "position": {
-          "left": 205,
-          "top": 45,
+          "left": 155,
+          "top": 20,
           "relativeTo": "map"
         },
         "placeholderIndex": 2,
@@ -121,8 +124,8 @@
       },
       {
         "position": {
-          "left": 255,
-          "top": 45,
+          "left": 205,
+          "top": 20,
           "relativeTo": "map"
         },
         "placeholderIndex": 3,
@@ -138,7 +141,8 @@
         },
         "version": "2.16",
         "id": "widgets_OverviewMap_Widget_10",
-        "name": "OverviewMap"
+        "name": "OverviewMap",
+        "config": "configs/OverviewMap/config_widgets_OverviewMap_Widget_10.json"
       },
       {
         "uri": "widgets/HomeButton/Widget",
@@ -169,7 +173,9 @@
         },
         "version": "2.16",
         "id": "widgets_AttributeTable_Widget_13",
-        "name": "AttributeTable"
+        "name": "AttributeTable",
+        "config": "configs/AttributeTable/config_widgets_AttributeTable_Widget_13.json",
+        "visible": false
       },
       {
         "uri": "widgets/Splash/Widget",
@@ -246,7 +252,7 @@
       }
     },
     "id": "map",
-    "portalUrl": "http://esricldemo.maps.arcgis.com/"
+    "portalUrl": "https://esricldemo.maps.arcgis.com/"
   },
   "widgetPool": {
     "panel": {
@@ -314,7 +320,7 @@
   "isWebTier": false,
   "httpProxy": {
     "useProxy": true,
-    "url": "/proxy.js"
+    "url": "https://desktop-ml30er1:3344/proxy.js"
   },
   "dataSource": {
     "dataSources": {},

@@ -1,6 +1,6 @@
 define({
   root: ({
-    _widgetLabel: "Buscador"
+    _widgetLabel: "Solicitud Actualización Datos de Dirección"
   }),
   "ar": 0,
   "cs": 0,

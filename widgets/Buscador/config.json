@@ -1,0 +1,12 @@
+{
+	"apiKey": "QwSXmBxppdkzayklC1ek12XdSUoTIE4MRPqFxQoapmQ",
+	"urlGeocoder":"https://geocoder.ls.hereapi.com/6.2/geocode.json",
+	"urlAutocomplete":"https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json",
+	"urlBaseApi": "https://localhost:44372/api/",
+	"endPointRegiones": "Region",
+	"endPointProvincias": "Provincia/",
+	"endPointComunas": "Comuna/",
+	"endPointCalles": "Calle/",
+	"endPointNumeros": "Numero/",
+	"endPointData": "Registro/"
+}
