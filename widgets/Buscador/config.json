@@ -2,11 +2,1395 @@
 	"apiKey": "QwSXmBxppdkzayklC1ek12XdSUoTIE4MRPqFxQoapmQ",
 	"urlGeocoder":"https://geocoder.ls.hereapi.com/6.2/geocode.json",
 	"urlAutocomplete":"https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json",
+	"urlUnidadVecinal": "https://mdsfmapas.ministeriodesarrollosocial.gob.cl/arcgis/rest/services/CAPTURA_DE_DIRECCIONES/UnidadesVecinales/FeatureServer/0",
 	"urlBaseApi": "https://localhost:44372/api/",
 	"endPointRegiones": "Region",
+	"endPointComunasRegion": "ComunaRegion/",
 	"endPointProvincias": "Provincia/",
 	"endPointComunas": "Comuna/",
 	"endPointCalles": "Calle/",
 	"endPointNumeros": "Numero/",
-	"endPointData": "Registro/"
+	"endPointData": "Registro",
+	"centroideComunas": [{
+		"nombre": "NIQUEN",
+		"longitud": "-71.89765326050",
+		"latitud": "-36.30224968340"
+		},{
+		"nombre": "NUNOA",
+		"longitud": "-70.59872527870",
+		"latitud": "-33.45776416820"
+		},{
+		"nombre": "AISEN",
+		"longitud": "-73.77413880490",
+		"latitud": "-45.98910533170"
+		},{
+		"nombre": "ALGARROBO",
+		"longitud": "-71.59927734770",
+		"latitud": "-33.32924799950"
+		},{
+		"nombre": "ALHUE",
+		"longitud": "-71.05649924030",
+		"latitud": "-34.04248098790"
+		},{
+		"nombre": "ALTO BIOBIO",
+		"longitud": "-71.34695988190",
+		"latitud": "-37.86554138230"
+		},{
+		"nombre": "ALTO DEL CARMEN",
+		"longitud": "-70.15329035340",
+		"latitud": "-28.99278575500"
+		},{
+		"nombre": "ALTO HOSPICIO",
+		"longitud": "-70.01188449980",
+		"latitud": "-20.19109372280"
+		},{
+		"nombre": "ANCUD",
+		"longitud": "-73.80219045230",
+		"latitud": "-42.01732268890"
+		},{
+		"nombre": "ANDACOLLO",
+		"longitud": "-71.10066728550",
+		"latitud": "-30.25947519120"
+		},{
+		"nombre": "ANGOL",
+		"longitud": "-72.79551827280",
+		"latitud": "-37.76866458080"
+		},{
+		"nombre": "ANTOFAGASTA",
+		"longitud": "-69.40874324860",
+		"latitud": "-24.27557481140"
+		},{
+		"nombre": "ANTUCO",
+		"longitud": "-71.36684319680",
+		"latitud": "-37.32773938120"
+		},{
+		"nombre": "ARAUCO",
+		"longitud": "-73.39990078460",
+		"latitud": "-37.28840630000"
+		},{
+		"nombre": "ARICA",
+		"longitud": "-69.97269128870",
+		"latitud": "-18.53228602910"
+		},{
+		"nombre": "BUIN",
+		"longitud": "-70.73905983150",
+		"latitud": "-33.74790907850"
+		},{
+		"nombre": "BULNES",
+		"longitud": "-72.29017651670",
+		"latitud": "-36.79043383600"
+		},{
+		"nombre": "CANETE",
+		"longitud": "-73.31745653340",
+		"latitud": "-37.87374764940"
+		},{
+		"nombre": "CABILDO",
+		"longitud": "-70.82374160450",
+		"latitud": "-32.41731461960"
+		},{
+		"nombre": "CABO DE HORNOS",
+		"longitud": "-69.25091482220",
+		"latitud": "-55.02265164320"
+		},{
+		"nombre": "CABRERO",
+		"longitud": "-72.38131431050",
+		"latitud": "-37.06198818830"
+		},{
+		"nombre": "CALAMA",
+		"longitud": "-68.62983389900",
+		"latitud": "-22.16338997030"
+		},{
+		"nombre": "CALBUCO",
+		"longitud": "-73.19459155230",
+		"latitud": "-41.72260375610"
+		},{
+		"nombre": "CALDERA",
+		"longitud": "-70.68293367060",
+		"latitud": "-27.14129534680"
+		},{
+		"nombre": "CALERA",
+		"longitud": "-71.15679912790",
+		"latitud": "-32.79373360180"
+		},{
+		"nombre": "CALERA DE TANGO",
+		"longitud": "-70.79016705030",
+		"latitud": "-33.62301815230"
+		},{
+		"nombre": "CALLE LARGA",
+		"longitud": "-70.54463212490",
+		"latitud": "-32.95057482670"
+		},{
+		"nombre": "CAMARONES",
+		"longitud": "-69.71496030960",
+		"latitud": "-18.93742729500"
+		},{
+		"nombre": "CAMINA",
+		"longitud": "-69.50543060130",
+		"latitud": "-19.37351899280"
+		},{
+		"nombre": "CANELA",
+		"longitud": "-71.39452577410",
+		"latitud": "-31.40197123260"
+		},{
+		"nombre": "CARAHUE",
+		"longitud": "-73.26950718890",
+		"latitud": "-38.61126261170"
+		},{
+		"nombre": "CARTAGENA",
+		"longitud": "-71.44206091960",
+		"latitud": "-33.53377134490"
+		},{
+		"nombre": "CASABLANCA",
+		"longitud": "-71.43478187890",
+		"latitud": "-33.31573984420"
+		},{
+		"nombre": "CASTRO",
+		"longitud": "-73.80471891550",
+		"latitud": "-42.47370899220"
+		},{
+		"nombre": "CATEMU",
+		"longitud": "-70.94467446510",
+		"latitud": "-32.70734361460"
+		},{
+		"nombre": "CAUQUENES",
+		"longitud": "-72.28046043820",
+		"latitud": "-35.97136478410"
+		},{
+		"nombre": "CERRILLOS",
+		"longitud": "-70.71224927110",
+		"latitud": "-33.49955161930"
+		},{
+		"nombre": "CERRO NAVIA",
+		"longitud": "-70.74420712650",
+		"latitud": "-33.42194129840"
+		},{
+		"nombre": "CHEPICA",
+		"longitud": "-71.35975969620",
+		"latitud": "-34.79190504120"
+		},{
+		"nombre": "CHANARAL",
+		"longitud": "-70.33790805780",
+		"latitud": "-26.37297456390"
+		},{
+		"nombre": "CHAITEN",
+		"longitud": "-72.57609460630",
+		"latitud": "-43.09480745380"
+		},{
+		"nombre": "CHANCO",
+		"longitud": "-72.48517387060",
+		"latitud": "-35.69894713340"
+		},{
+		"nombre": "CHIGUAYANTE",
+		"longitud": "-73.00465731860",
+		"latitud": "-36.90146305550"
+		},{
+		"nombre": "CHILE CHICO",
+		"longitud": "-72.58564758060",
+		"latitud": "-46.76661083570"
+		},{
+		"nombre": "CHILLAN",
+		"longitud": "-72.12869423580",
+		"latitud": "-36.61744806970"
+		},{
+		"nombre": "CHILLAN VIEJO",
+		"longitud": "-72.19888441260",
+		"latitud": "-36.68029710170"
+		},{
+		"nombre": "CHIMBARONGO",
+		"longitud": "-70.98081589470",
+		"latitud": "-34.75168792850"
+		},{
+		"nombre": "CHOLCHOL",
+		"longitud": "-72.90244446750",
+		"latitud": "-38.58323326790"
+		},{
+		"nombre": "CHONCHI",
+		"longitud": "-73.93068155330",
+		"latitud": "-42.68190446730"
+		},{
+		"nombre": "CISNES",
+		"longitud": "-73.13732157050",
+		"latitud": "-44.45726374000"
+		},{
+		"nombre": "COBQUECURA",
+		"longitud": "-72.72067928410",
+		"latitud": "-36.18094618840"
+		},{
+		"nombre": "COCHAMO",
+		"longitud": "-72.10384110520",
+		"latitud": "-41.75558777570"
+		},{
+		"nombre": "COCHRANE",
+		"longitud": "-72.74297616060",
+		"latitud": "-47.35869546610"
+		},{
+		"nombre": "CODEGUA",
+		"longitud": "-70.54742254500",
+		"latitud": "-34.05703425310"
+		},{
+		"nombre": "COELEMU",
+		"longitud": "-72.75044252010",
+		"latitud": "-36.50499267130"
+		},{
+		"nombre": "COIHAIQUE",
+		"longitud": "-71.99241842400",
+		"latitud": "-45.55362848360"
+		},{
+		"nombre": "COIHUECO",
+		"longitud": "-71.58119170130",
+		"latitud": "-36.70196327030"
+		},{
+		"nombre": "COINCO",
+		"longitud": "-70.97114047310",
+		"latitud": "-34.28228499240"
+		},{
+		"nombre": "COLBUN",
+		"longitud": "-70.97878474460",
+		"latitud": "-36.07696455250"
+		},{
+		"nombre": "COLCHANE",
+		"longitud": "-68.84501394600",
+		"latitud": "-19.35336636880"
+		},{
+		"nombre": "COLINA",
+		"longitud": "-70.61600563000",
+		"latitud": "-33.13478131450"
+		},{
+		"nombre": "COLLIPULLI",
+		"longitud": "-72.12415598280",
+		"latitud": "-38.02638180220"
+		},{
+		"nombre": "COLTAUCO",
+		"longitud": "-71.07743854330",
+		"latitud": "-34.25954260730"
+		},{
+		"nombre": "COMBARBALA",
+		"longitud": "-70.96551072980",
+		"latitud": "-31.14652503030"
+		},{
+		"nombre": "CONCON",
+		"longitud": "-71.46750092320",
+		"latitud": "-32.95209383460"
+		},{
+		"nombre": "CONCEPCION",
+		"longitud": "-72.95123161470",
+		"latitud": "-36.83433583380"
+		},{
+		"nombre": "CONCHALI",
+		"longitud": "-70.67645265570",
+		"latitud": "-33.38357449770"
+		},{
+		"nombre": "CONSTITUCION",
+		"longitud": "-72.27614323400",
+		"latitud": "-35.36323247550"
+		},{
+		"nombre": "CONTULMO",
+		"longitud": "-73.21200166150",
+		"latitud": "-38.05245674230"
+		},{
+		"nombre": "COPIAPO",
+		"longitud": "-69.82781226020",
+		"latitud": "-27.31947833280"
+		},{
+		"nombre": "COQUIMBO",
+		"longitud": "-71.35920419810",
+		"latitud": "-30.22781418400"
+		},{
+		"nombre": "CORONEL",
+		"longitud": "-73.12558305110",
+		"latitud": "-37.00710198330"
+		},{
+		"nombre": "CORRAL",
+		"longitud": "-73.37242799710",
+		"latitud": "-39.98896560910"
+		},{
+		"nombre": "CUNCO",
+		"longitud": "-71.99214507310",
+		"latitud": "-38.97722301790"
+		},{
+		"nombre": "CURACAUTIN",
+		"longitud": "-71.77196797880",
+		"latitud": "-38.42721829920"
+		},{
+		"nombre": "CURACAVI",
+		"longitud": "-71.08014573230",
+		"latitud": "-33.36632558320"
+		},{
+		"nombre": "CURACO DE VELEZ",
+		"longitud": "-73.57895037950",
+		"latitud": "-42.42641023880"
+		},{
+		"nombre": "CURANILAHUE",
+		"longitud": "-73.23554097480",
+		"latitud": "-37.48289411310"
+		},{
+		"nombre": "CURARREHUE",
+		"longitud": "-71.53954993710",
+		"latitud": "-39.33634942200"
+		},{
+		"nombre": "CUREPTO",
+		"longitud": "-71.95310747740",
+		"latitud": "-35.12979755370"
+		},{
+		"nombre": "CURICO",
+		"longitud": "-70.89601588530",
+		"latitud": "-35.19880623640"
+		},{
+		"nombre": "DALCAHUE",
+		"longitud": "-73.83376599330",
+		"latitud": "-42.30867906970"
+		},{
+		"nombre": "DIEGO DE ALMAGRO",
+		"longitud": "-69.18715391880",
+		"latitud": "-26.23664050330"
+		},{
+		"nombre": "DONIHUE",
+		"longitud": "-70.92342115850",
+		"latitud": "-34.19653176130"
+		},{
+		"nombre": "EL BOSQUE",
+		"longitud": "-70.67623331840",
+		"latitud": "-33.56275664340"
+		},{
+		"nombre": "EL CARMEN",
+		"longitud": "-71.84707710360",
+		"latitud": "-36.92505094250"
+		},{
+		"nombre": "EL MONTE",
+		"longitud": "-71.03356165050",
+		"latitud": "-33.66771465470"
+		},{
+		"nombre": "EL OLIVAR",
+		"longitud": "-70.82074774070",
+		"latitud": "-34.21151401570"
+		},{
+		"nombre": "EL QUISCO",
+		"longitud": "-71.65067380130",
+		"latitud": "-33.41539645050"
+		},{
+		"nombre": "EL TABO",
+		"longitud": "-71.58057792200",
+		"latitud": "-33.48291167140"
+		},{
+		"nombre": "EMPEDRADO",
+		"longitud": "-72.28410905830",
+		"latitud": "-35.61357112330"
+		},{
+		"nombre": "ERCILLA",
+		"longitud": "-72.35294086280",
+		"latitud": "-38.08281735140"
+		},{
+		"nombre": "ESTACION CENTRAL",
+		"longitud": "-70.70078516010",
+		"latitud": "-33.46408631630"
+		},{
+		"nombre": "FLORIDA",
+		"longitud": "-72.71782051090",
+		"latitud": "-36.82232976590"
+		},{
+		"nombre": "FREIRE",
+		"longitud": "-72.58841440300",
+		"latitud": "-38.95500272620"
+		},{
+		"nombre": "FREIRINA",
+		"longitud": "-71.19545885180",
+		"latitud": "-28.84354333090"
+		},{
+		"nombre": "FRESIA",
+		"longitud": "-73.60663792760",
+		"latitud": "-41.15450395510"
+		},{
+		"nombre": "FRUTILLAR",
+		"longitud": "-73.09588187070",
+		"latitud": "-41.08735872050"
+		},{
+		"nombre": "FUTALEUFU",
+		"longitud": "-72.00721105210",
+		"latitud": "-43.18002429790"
+		},{
+		"nombre": "FUTRONO",
+		"longitud": "-72.11557050130",
+		"latitud": "-40.11860115870"
+		},{
+		"nombre": "GALVARINO",
+		"longitud": "-72.79166136940",
+		"latitud": "-38.44823362100"
+		},{
+		"nombre": "GENERAL LAGOS",
+		"longitud": "-69.57162962100",
+		"latitud": "-17.83037885900"
+		},{
+		"nombre": "GORBEA",
+		"longitud": "-72.66957429090",
+		"latitud": "-39.17192988820"
+		},{
+		"nombre": "GRANEROS",
+		"longitud": "-70.74736014180",
+		"latitud": "-34.06558747400"
+		},{
+		"nombre": "GUAITECAS",
+		"longitud": "-73.81375756040",
+		"latitud": "-43.94670480450"
+		},{
+		"nombre": "HIJUELAS",
+		"longitud": "-71.08111586100",
+		"latitud": "-32.86928941080"
+		},{
+		"nombre": "HUALANE",
+		"longitud": "-71.70869683200",
+		"latitud": "-34.95266129530"
+		},{
+		"nombre": "HUALAIHUE",
+		"longitud": "-72.37604792280",
+		"latitud": "-42.17782501070"
+		},{
+		"nombre": "HUALPEN",
+		"longitud": "-73.14143836060",
+		"latitud": "-36.78878216120"
+		},{
+		"nombre": "HUALQUI",
+		"longitud": "-72.87098679720",
+		"latitud": "-37.04483002240"
+		},{
+		"nombre": "HUARA",
+		"longitud": "-69.66170785450",
+		"latitud": "-19.60337186910"
+		},{
+		"nombre": "HUASCO",
+		"longitud": "-71.01743171480",
+		"latitud": "-28.25744903180"
+		},{
+		"nombre": "HUECHURABA",
+		"longitud": "-70.63785113430",
+		"latitud": "-33.36055994970"
+		},{
+		"nombre": "ILLAPEL",
+		"longitud": "-70.97063593780",
+		"latitud": "-31.54922064490"
+		},{
+		"nombre": "INDEPENDENCIA",
+		"longitud": "-70.66493483490",
+		"latitud": "-33.41442474490"
+		},{
+		"nombre": "IQUIQUE",
+		"longitud": "-70.04145093330",
+		"latitud": "-20.94083675780"
+		},{
+		"nombre": "ISLA DE MAIPO",
+		"longitud": "-70.94589693740",
+		"latitud": "-33.74852308710"
+		},{
+		"nombre": "ISLA DE PASCUA",
+		"longitud": "-109.35092162800",
+		"latitud": "-27.11877200500"
+		},{
+		"nombre": "JUAN FERNANDEZ",
+		"longitud": "-79.85306904250",
+		"latitud": "-33.70981799030"
+		},{
+		"nombre": "LA CISTERNA",
+		"longitud": "-70.66377559210",
+		"latitud": "-33.53007556190"
+		},{
+		"nombre": "LA CRUZ",
+		"longitud": "-71.24027849270",
+		"latitud": "-32.82527232040"
+		},{
+		"nombre": "LA ESTRELLA",
+		"longitud": "-71.60258675650",
+		"latitud": "-34.22309406940"
+		},{
+		"nombre": "LA FLORIDA",
+		"longitud": "-70.53988881770",
+		"latitud": "-33.52826698650"
+		},{
+		"nombre": "LA GRANJA",
+		"longitud": "-70.62244634480",
+		"latitud": "-33.53546369080"
+		},{
+		"nombre": "LA HIGUERA",
+		"longitud": "-70.90150275310",
+		"latitud": "-29.37462996630"
+		},{
+		"nombre": "LA LIGUA",
+		"longitud": "-71.27153023120",
+		"latitud": "-32.35357767650"
+		},{
+		"nombre": "LA PINTANA",
+		"longitud": "-70.63725246580",
+		"latitud": "-33.58757978780"
+		},{
+		"nombre": "LA REINA",
+		"longitud": "-70.53690640920",
+		"latitud": "-33.44714624680"
+		},{
+		"nombre": "LA SERENA",
+		"longitud": "-71.06084043820",
+		"latitud": "-29.78919738680"
+		},{
+		"nombre": "LA UNION",
+		"longitud": "-73.22186636970",
+		"latitud": "-40.20144380880"
+		},{
+		"nombre": "LAGO RANCO",
+		"longitud": "-72.16590975520",
+		"latitud": "-40.37261407720"
+		},{
+		"nombre": "LAGO VERDE",
+		"longitud": "-71.83427874140",
+		"latitud": "-44.49162444140"
+		},{
+		"nombre": "LAGUNA BLANCA",
+		"longitud": "-71.23978183870",
+		"latitud": "-52.33043387820"
+		},{
+		"nombre": "LAJA",
+		"longitud": "-72.58253990250",
+		"latitud": "-37.31260480750"
+		},{
+		"nombre": "LAMPA",
+		"longitud": "-70.87524141520",
+		"latitud": "-33.27783484660"
+		},{
+		"nombre": "LANCO",
+		"longitud": "-72.62140215650",
+		"latitud": "-39.51211995320"
+		},{
+		"nombre": "LAS CABRAS",
+		"longitud": "-71.33263432800",
+		"latitud": "-34.16463298010"
+		},{
+		"nombre": "LAS CONDES",
+		"longitud": "-70.50130898320",
+		"latitud": "-33.42117733910"
+		},{
+		"nombre": "LAUTARO",
+		"longitud": "-72.28906535880",
+		"latitud": "-38.54321736920"
+		},{
+		"nombre": "LEBU",
+		"longitud": "-73.59057218730",
+		"latitud": "-37.67730520340"
+		},{
+		"nombre": "LICANTEN",
+		"longitud": "-72.06073585740",
+		"latitud": "-34.97409193550"
+		},{
+		"nombre": "LIMACHE",
+		"longitud": "-71.27884760770",
+		"latitud": "-33.03085969130"
+		},{
+		"nombre": "LINARES",
+		"longitud": "-71.33218191680",
+		"latitud": "-35.95829398040"
+		},{
+		"nombre": "LITUECHE",
+		"longitud": "-71.73323043910",
+		"latitud": "-34.10690375790"
+		},{
+		"nombre": "LLAILLAY",
+		"longitud": "-70.90174781260",
+		"latitud": "-32.88795627020"
+		},{
+		"nombre": "LLANQUIHUE",
+		"longitud": "-73.13968935560",
+		"latitud": "-41.23782509930"
+		},{
+		"nombre": "LO BARNECHEA",
+		"longitud": "-70.36865646500",
+		"latitud": "-33.29920869020"
+		},{
+		"nombre": "LO ESPEJO",
+		"longitud": "-70.68964052900",
+		"latitud": "-33.52043613560"
+		},{
+		"nombre": "LO PRADO",
+		"longitud": "-70.72287834610",
+		"latitud": "-33.44677728100"
+		},{
+		"nombre": "LOLOL",
+		"longitud": "-71.64890184330",
+		"latitud": "-34.76824853120"
+		},{
+		"nombre": "LONCOCHE",
+		"longitud": "-72.58284746860",
+		"latitud": "-39.35620798950"
+		},{
+		"nombre": "LONGAVI",
+		"longitud": "-71.44142306240",
+		"latitud": "-36.11053748350"
+		},{
+		"nombre": "LONQUIMAY",
+		"longitud": "-71.23917962380",
+		"latitud": "-38.47435152980"
+		},{
+		"nombre": "LOS ALAMOS",
+		"longitud": "-73.35697183240",
+		"latitud": "-37.67356648640"
+		},{
+		"nombre": "LOS ANGELES",
+		"longitud": "-72.32749102060",
+		"latitud": "-37.40755499600"
+		},{
+		"nombre": "LOS ANDES",
+		"longitud": "-70.24314662810",
+		"latitud": "-32.95068961170"
+		},{
+		"nombre": "LOS LAGOS",
+		"longitud": "-72.55452203690",
+		"latitud": "-39.87841141020"
+		},{
+		"nombre": "LOS MUERMOS",
+		"longitud": "-73.58234525760",
+		"latitud": "-41.39794126340"
+		},{
+		"nombre": "LOS SAUCES",
+		"longitud": "-72.79679359900",
+		"latitud": "-37.98288896950"
+		},{
+		"nombre": "LOS VILOS",
+		"longitud": "-71.30424720870",
+		"latitud": "-31.97779322990"
+		},{
+		"nombre": "LOTA",
+		"longitud": "-73.10494673970",
+		"latitud": "-37.11961917550"
+		},{
+		"nombre": "LUMACO",
+		"longitud": "-73.04600198930",
+		"latitud": "-38.28715796840"
+		},{
+		"nombre": "MAFIL",
+		"longitud": "-72.86368352470",
+		"latitud": "-39.69206553770"
+		},{
+		"nombre": "MACHALI",
+		"longitud": "-70.31912199030",
+		"latitud": "-34.32060194940"
+		},{
+		"nombre": "MACUL",
+		"longitud": "-70.59999436550",
+		"latitud": "-33.48933037510"
+		},{
+		"nombre": "MAIPU",
+		"longitud": "-70.80954249940",
+		"latitud": "-33.50672771900"
+		},{
+		"nombre": "MALLOA",
+		"longitud": "-70.87283186490",
+		"latitud": "-34.47649789780"
+		},{
+		"nombre": "MARIA ELENA",
+		"longitud": "-69.46114571940",
+		"latitud": "-22.09049990470"
+		},{
+		"nombre": "MARIA PINTO",
+		"longitud": "-71.21045471270",
+		"latitud": "-33.49787328700"
+		},{
+		"nombre": "MARCHIHUE",
+		"longitud": "-71.67174054830",
+		"latitud": "-34.37258596750"
+		},{
+		"nombre": "MARIQUINA",
+		"longitud": "-73.01704404120",
+		"latitud": "-39.51043120390"
+		},{
+		"nombre": "MAULE",
+		"longitud": "-71.71196762360",
+		"latitud": "-35.50821244150"
+		},{
+		"nombre": "MAULLIN",
+		"longitud": "-73.50835286430",
+		"latitud": "-41.63242272560"
+		},{
+		"nombre": "MEJILLONES",
+		"longitud": "-70.19882911230",
+		"latitud": "-22.93637821680"
+		},{
+		"nombre": "MELIPEUCO",
+		"longitud": "-71.61077171880",
+		"latitud": "-38.82479440540"
+		},{
+		"nombre": "MELIPILLA",
+		"longitud": "-71.19375077840",
+		"latitud": "-33.74364846340"
+		},{
+		"nombre": "MOLINA",
+		"longitud": "-70.90992214900",
+		"latitud": "-35.35282936040"
+		},{
+		"nombre": "MONTE PATRIA",
+		"longitud": "-70.65040481380",
+		"latitud": "-30.83427636910"
+		},{
+		"nombre": "MOSTAZAL",
+		"longitud": "-70.56892305680",
+		"latitud": "-33.95549081620"
+		},{
+		"nombre": "MULCHEN",
+		"longitud": "-72.09704627080",
+		"latitud": "-37.83835674700"
+		},{
+		"nombre": "NACIMIENTO",
+		"longitud": "-72.82352158510",
+		"latitud": "-37.48541683210"
+		},{
+		"nombre": "NANCAGUA",
+		"longitud": "-71.19189554410",
+		"latitud": "-34.66743681280"
+		},{
+		"nombre": "NATALES",
+		"longitud": "-73.99163622990",
+		"latitud": "-50.72381032320"
+		},{
+		"nombre": "NAVIDAD",
+		"longitud": "-71.82057882940",
+		"latitud": "-34.01247318170"
+		},{
+		"nombre": "NEGRETE",
+		"longitud": "-72.57630782630",
+		"latitud": "-37.60805680190"
+		},{
+		"nombre": "NINHUE",
+		"longitud": "-72.40973421090",
+		"latitud": "-36.35682514030"
+		},{
+		"nombre": "NOGALES",
+		"longitud": "-71.17612404490",
+		"latitud": "-32.69143466740"
+		},{
+		"nombre": "NUEVA IMPERIAL",
+		"longitud": "-72.97178275140",
+		"latitud": "-38.75158522510"
+		},{
+		"nombre": "OHIGGINS",
+		"longitud": "-72.90894521730",
+		"latitud": "-48.48259511800"
+		},{
+		"nombre": "OLLAGUE",
+		"longitud": "-68.31315212760",
+		"latitud": "-21.45669342960"
+		},{
+		"nombre": "OLMUE",
+		"longitud": "-71.11055597510",
+		"latitud": "-33.03563309150"
+		},{
+		"nombre": "OSORNO",
+		"longitud": "-73.08651876250",
+		"latitud": "-40.61188742090"
+		},{
+		"nombre": "OVALLE",
+		"longitud": "-71.40570563570",
+		"latitud": "-30.67321622980"
+		},{
+		"nombre": "PADRE HURTADO",
+		"longitud": "-70.87082772890",
+		"latitud": "-33.55734951820"
+		},{
+		"nombre": "PADRE LAS CASAS",
+		"longitud": "-72.55536927400",
+		"latitud": "-38.80228174700"
+		},{
+		"nombre": "PAIGUANO",
+		"longitud": "-70.37029922850",
+		"latitud": "-30.23684752730"
+		},{
+		"nombre": "PAILLACO",
+		"longitud": "-72.84331980250",
+		"latitud": "-40.07430557250"
+		},{
+		"nombre": "PAINE",
+		"longitud": "-70.75856819090",
+		"latitud": "-33.86340884530"
+		},{
+		"nombre": "PALENA",
+		"longitud": "-71.98344266680",
+		"latitud": "-43.68262157090"
+		},{
+		"nombre": "PALMILLA",
+		"longitud": "-71.35291458050",
+		"latitud": "-34.52794449300"
+		},{
+		"nombre": "PANGUIPULLI",
+		"longitud": "-72.02924355640",
+		"latitud": "-39.71457379680"
+		},{
+		"nombre": "PANQUEHUE",
+		"longitud": "-70.82853035590",
+		"latitud": "-32.79371289570"
+		},{
+		"nombre": "PAPUDO",
+		"longitud": "-71.38035950260",
+		"latitud": "-32.47497455440"
+		},{
+		"nombre": "PAREDONES",
+		"longitud": "-71.91147995200",
+		"latitud": "-34.67342404270"
+		},{
+		"nombre": "PARRAL",
+		"longitud": "-71.64579578480",
+		"latitud": "-36.26207759750"
+		},{
+		"nombre": "PENAFLOR",
+		"longitud": "-70.89373381110",
+		"latitud": "-33.61086436170"
+		},{
+		"nombre": "PENALOLEN",
+		"longitud": "-70.52541708900",
+		"latitud": "-33.48531423040"
+		},{
+		"nombre": "PEDRO AGUIRRE CERDA",
+		"longitud": "-70.67556504250",
+		"latitud": "-33.49146498260"
+		},{
+		"nombre": "PELARCO",
+		"longitud": "-71.35003893290",
+		"latitud": "-35.38305557560"
+		},{
+		"nombre": "PELLUHUE",
+		"longitud": "-72.60781687680",
+		"latitud": "-35.91158011700"
+		},{
+		"nombre": "PEMUCO",
+		"longitud": "-72.06761152410",
+		"latitud": "-36.98292192370"
+		},{
+		"nombre": "PENCAHUE",
+		"longitud": "-71.81628747250",
+		"latitud": "-35.32755882410"
+		},{
+		"nombre": "PENCO",
+		"longitud": "-72.94369185770",
+		"latitud": "-36.74778217380"
+		},{
+		"nombre": "PERALILLO",
+		"longitud": "-71.49670397140",
+		"latitud": "-34.46602550780"
+		},{
+		"nombre": "PERQUENCO",
+		"longitud": "-72.43664574430",
+		"latitud": "-38.42825558880"
+		},{
+		"nombre": "PETORCA",
+		"longitud": "-70.86986947900",
+		"latitud": "-32.19028711010"
+		},{
+		"nombre": "PEUMO",
+		"longitud": "-71.22177424440",
+		"latitud": "-34.32911292930"
+		},{
+		"nombre": "PICA",
+		"longitud": "-68.91193169480",
+		"latitud": "-20.47892410070"
+		},{
+		"nombre": "PICHIDEGUA",
+		"longitud": "-71.33902893900",
+		"latitud": "-34.37119654880"
+		},{
+		"nombre": "PICHILEMU",
+		"longitud": "-71.91070725580",
+		"latitud": "-34.38402558220"
+		},{
+		"nombre": "PINTO",
+		"longitud": "-71.49970588020",
+		"latitud": "-36.92129207030"
+		},{
+		"nombre": "PIRQUE",
+		"longitud": "-70.50707220660",
+		"latitud": "-33.71831267950"
+		},{
+		"nombre": "PITRUFQUEN",
+		"longitud": "-72.66359850160",
+		"latitud": "-39.08394146480"
+		},{
+		"nombre": "PLACILLA",
+		"longitud": "-71.08630418330",
+		"latitud": "-34.61900384650"
+		},{
+		"nombre": "PORTEZUELO",
+		"longitud": "-72.46660737600",
+		"latitud": "-36.54635991830"
+		},{
+		"nombre": "PORVENIR",
+		"longitud": "-69.38055950950",
+		"latitud": "-53.31227142140"
+		},{
+		"nombre": "POZO ALMONTE",
+		"longitud": "-69.50450387480",
+		"latitud": "-20.76994245210"
+		},{
+		"nombre": "PRIMAVERA",
+		"longitud": "-69.32943484200",
+		"latitud": "-52.81761379560"
+		},{
+		"nombre": "PROVIDENCIA",
+		"longitud": "-70.61192992430",
+		"latitud": "-33.43161976040"
+		},{
+		"nombre": "PUCON",
+		"longitud": "-71.79135523880",
+		"latitud": "-39.27014186480"
+		},{
+		"nombre": "PUCHUNCAVI",
+		"longitud": "-71.38789891400",
+		"latitud": "-32.74521887930"
+		},{
+		"nombre": "PUDAHUEL",
+		"longitud": "-70.85473247860",
+		"latitud": "-33.42380137450"
+		},{
+		"nombre": "PUENTE ALTO",
+		"longitud": "-70.55806123280",
+		"latitud": "-33.59075123450"
+		},{
+		"nombre": "PUERTO MONTT",
+		"longitud": "-72.79541899480",
+		"latitud": "-41.48858925580"
+		},{
+		"nombre": "PUERTO OCTAY",
+		"longitud": "-72.59959435320",
+		"latitud": "-40.93333641330"
+		},{
+		"nombre": "PUERTO VARAS",
+		"longitud": "-72.38739728940",
+		"latitud": "-41.19099284230"
+		},{
+		"nombre": "PUMANQUE",
+		"longitud": "-71.69176736090",
+		"latitud": "-34.59587389910"
+		},{
+		"nombre": "PUNITAQUI",
+		"longitud": "-71.33271774060",
+		"latitud": "-30.94610693580"
+		},{
+		"nombre": "PUNTA ARENAS",
+		"longitud": "-72.01955985650",
+		"latitud": "-53.64539847700"
+		},{
+		"nombre": "PUQUELDON",
+		"longitud": "-73.63733100350",
+		"latitud": "-42.62659349520"
+		},{
+		"nombre": "PUREN",
+		"longitud": "-73.05043324710",
+		"latitud": "-38.01211183430"
+		},{
+		"nombre": "PURRANQUE",
+		"longitud": "-73.45805500700",
+		"latitud": "-40.93544198090"
+		},{
+		"nombre": "PUTAENDO",
+		"longitud": "-70.52151751190",
+		"latitud": "-32.48110110600"
+		},{
+		"nombre": "PUTRE",
+		"longitud": "-69.31131075620",
+		"latitud": "-18.42865101400"
+		},{
+		"nombre": "PUYEHUE",
+		"longitud": "-72.38335216680",
+		"latitud": "-40.72539894570"
+		},{
+		"nombre": "QUEILEN",
+		"longitud": "-73.56444282250",
+		"latitud": "-42.85575258260"
+		},{
+		"nombre": "QUELLON",
+		"longitud": "-73.99494988480",
+		"latitud": "-43.15111021660"
+		},{
+		"nombre": "QUEMCHI",
+		"longitud": "-73.41115448150",
+		"latitud": "-42.17906424720"
+		},{
+		"nombre": "QUILACO",
+		"longitud": "-71.70510032510",
+		"latitud": "-37.96059116460"
+		},{
+		"nombre": "QUILICURA",
+		"longitud": "-70.73519389630",
+		"latitud": "-33.35548942450"
+		},{
+		"nombre": "QUILLON",
+		"longitud": "-72.50179846190",
+		"latitud": "-36.81850153530"
+		},{
+		"nombre": "QUILLECO",
+		"longitud": "-71.86135405480",
+		"latitud": "-37.43665476120"
+		},{
+		"nombre": "QUILLOTA",
+		"longitud": "-71.27241589540",
+		"latitud": "-32.90473403150"
+		},{
+		"nombre": "QUILPUE",
+		"longitud": "-71.25453774000",
+		"latitud": "-33.14708063550"
+		},{
+		"nombre": "QUINCHAO",
+		"longitud": "-73.35909354500",
+		"latitud": "-42.52152806860"
+		},{
+		"nombre": "QUINTA DE TILCOCO",
+		"longitud": "-70.99807281160",
+		"latitud": "-34.35922109990"
+		},{
+		"nombre": "QUINTA NORMAL",
+		"longitud": "-70.70102081970",
+		"latitud": "-33.42730316670"
+		},{
+		"nombre": "QUINTERO",
+		"longitud": "-71.47308177210",
+		"latitud": "-32.84230457580"
+		},{
+		"nombre": "QUIRIHUE",
+		"longitud": "-72.54363807500",
+		"latitud": "-36.23563083430"
+		},{
+		"nombre": "RIO BUENO",
+		"longitud": "-72.53495568830",
+		"latitud": "-40.49593402840"
+		},{
+		"nombre": "RIO HURTADO",
+		"longitud": "-70.65386616070",
+		"latitud": "-30.43025796670"
+		},{
+		"nombre": "RIO IBANEZ",
+		"longitud": "-72.48705535460",
+		"latitud": "-46.29868918790"
+		},{
+		"nombre": "RIO NEGRO",
+		"longitud": "-73.41771552730",
+		"latitud": "-40.77089533880"
+		},{
+		"nombre": "RIO VERDE",
+		"longitud": "-72.45944478970",
+		"latitud": "-52.84439170140"
+		},{
+		"nombre": "RANCAGUA",
+		"longitud": "-70.81677158770",
+		"latitud": "-34.12565774960"
+		},{
+		"nombre": "RANQUIL",
+		"longitud": "-72.58781327460",
+		"latitud": "-36.64045295100"
+		},{
+		"nombre": "RAUCO",
+		"longitud": "-71.42576657310",
+		"latitud": "-34.93770949200"
+		},{
+		"nombre": "RECOLETA",
+		"longitud": "-70.63931556510",
+		"latitud": "-33.40554777200"
+		},{
+		"nombre": "RENAICO",
+		"longitud": "-72.57560256580",
+		"latitud": "-37.71755108750"
+		},{
+		"nombre": "RENCA",
+		"longitud": "-70.72741476590",
+		"latitud": "-33.40149426600"
+		},{
+		"nombre": "RENGO",
+		"longitud": "-70.71872813030",
+		"latitud": "-34.45465464020"
+		},{
+		"nombre": "REQUINOA",
+		"longitud": "-70.65910802390",
+		"latitud": "-34.33487541310"
+		},{
+		"nombre": "RETIRO",
+		"longitud": "-71.82960663170",
+		"latitud": "-36.00230395070"
+		},{
+		"nombre": "RINCONADA",
+		"longitud": "-70.70612123580",
+		"latitud": "-32.87611335090"
+		},{
+		"nombre": "RIO CLARO",
+		"longitud": "-71.26878536480",
+		"latitud": "-35.26063837100"
+		},{
+		"nombre": "ROMERAL",
+		"longitud": "-70.71179959890",
+		"latitud": "-35.06813165530"
+		},{
+		"nombre": "SAAVEDRA",
+		"longitud": "-73.29550140620",
+		"latitud": "-38.83260679180"
+		},{
+		"nombre": "SAGRADA FAMILIA",
+		"longitud": "-71.49581154770",
+		"latitud": "-35.10359161200"
+		},{
+		"nombre": "SALAMANCA",
+		"longitud": "-70.66147585510",
+		"latitud": "-31.89315475280"
+		},{
+		"nombre": "SAN ANTONIO",
+		"longitud": "-71.48707821180",
+		"latitud": "-33.66702777180"
+		},{
+		"nombre": "SAN BERNARDO",
+		"longitud": "-70.72404258410",
+		"latitud": "-33.62922273030"
+		},{
+		"nombre": "SAN CARLOS",
+		"longitud": "-72.01871558510",
+		"latitud": "-36.38577285540"
+		},{
+		"nombre": "SAN CLEMENTE",
+		"longitud": "-70.84840543970",
+		"latitud": "-35.71186683350"
+		},{
+		"nombre": "SAN ESTEBAN",
+		"longitud": "-70.34828938210",
+		"latitud": "-32.68662032880"
+		},{
+		"nombre": "SAN FABIAN",
+		"longitud": "-71.28738531180",
+		"latitud": "-36.57976401770"
+		},{
+		"nombre": "SAN FELIPE",
+		"longitud": "-70.75297379020",
+		"latitud": "-32.73627560870"
+		},{
+		"nombre": "SAN FERNANDO",
+		"longitud": "-70.60287187510",
+		"latitud": "-34.74359366590"
+		},{
+		"nombre": "SAN GREGORIO",
+		"longitud": "-70.22215697440",
+		"latitud": "-52.32068219170"
+		},{
+		"nombre": "SAN IGNACIO",
+		"longitud": "-72.02951828420",
+		"latitud": "-36.82235707440"
+		},{
+		"nombre": "SAN JAVIER",
+		"longitud": "-71.92681597690",
+		"latitud": "-35.62887357450"
+		},{
+		"nombre": "SAN JOAQUIN",
+		"longitud": "-70.62838435370",
+		"latitud": "-33.49592309610"
+		},{
+		"nombre": "SAN JOSE DE MAIPO",
+		"longitud": "-70.09677396290",
+		"latitud": "-33.70410896340"
+		},{
+		"nombre": "SAN JUAN DE LA COSTA",
+		"longitud": "-73.55915048260",
+		"latitud": "-40.50905837210"
+		},{
+		"nombre": "SAN MIGUEL",
+		"longitud": "-70.65154379720",
+		"latitud": "-33.49897114760"
+		},{
+		"nombre": "SAN NICOLAS",
+		"longitud": "-72.22843774060",
+		"latitud": "-36.47954934230"
+		},{
+		"nombre": "SAN PABLO",
+		"longitud": "-73.16158526990",
+		"latitud": "-40.42714932060"
+		},{
+		"nombre": "SAN PEDRO",
+		"longitud": "-71.45268808710",
+		"latitud": "-33.93155248730"
+		},{
+		"nombre": "SAN PEDRO DE ATACAMA",
+		"longitud": "-67.90908884970",
+		"latitud": "-23.40247652900"
+		},{
+		"nombre": "SAN PEDRO DE LA PAZ",
+		"longitud": "-73.09823465330",
+		"latitud": "-36.88105693310"
+		},{
+		"nombre": "SAN RAFAEL",
+		"longitud": "-71.50051313160",
+		"latitud": "-35.30151956600"
+		},{
+		"nombre": "SAN RAMON",
+		"longitud": "-70.64231964200",
+		"latitud": "-33.54055544520"
+		},{
+		"nombre": "SAN ROSENDO",
+		"longitud": "-72.72124151900",
+		"latitud": "-37.21322858670"
+		},{
+		"nombre": "SAN VICENTE",
+		"longitud": "-71.12315182200",
+		"latitud": "-34.47750037600"
+		},{
+		"nombre": "SANTA BARBARA",
+		"longitud": "-71.74819350330",
+		"latitud": "-37.62310488530"
+		},{
+		"nombre": "SANTA CRUZ",
+		"longitud": "-71.40189809240",
+		"latitud": "-34.64287284060"
+		},{
+		"nombre": "SANTA JUANA",
+		"longitud": "-72.96007461860",
+		"latitud": "-37.27672860160"
+		},{
+		"nombre": "SANTA MARIA",
+		"longitud": "-70.60972858220",
+		"latitud": "-32.68605541850"
+		},{
+		"nombre": "SANTIAGO",
+		"longitud": "-70.65664298850",
+		"latitud": "-33.45332357790"
+		},{
+		"nombre": "SANTO DOMINGO",
+		"longitud": "-71.67665913490",
+		"latitud": "-33.80949721650"
+		},{
+		"nombre": "SIERRA GORDA",
+		"longitud": "-69.30722765690",
+		"latitud": "-23.25586033010"
+		},{
+		"nombre": "TALAGANTE",
+		"longitud": "-70.89550270170",
+		"latitud": "-33.68182511590"
+		},{
+		"nombre": "TALCA",
+		"longitud": "-71.60214152440",
+		"latitud": "-35.42779423010"
+		},{
+		"nombre": "TALCAHUANO",
+		"longitud": "-73.09916753160",
+		"latitud": "-36.71543496840"
+		},{
+		"nombre": "TALTAL",
+		"longitud": "-69.86525850300",
+		"latitud": "-25.31395889720"
+		},{
+		"nombre": "TEMUCO",
+		"longitud": "-72.66777221830",
+		"latitud": "-38.67329377350"
+		},{
+		"nombre": "TENO",
+		"longitud": "-71.02171989080",
+		"latitud": "-34.88803664020"
+		},{
+		"nombre": "TEODORO SCHMIDT",
+		"longitud": "-73.12761267480",
+		"latitud": "-39.00550943180"
+		},{
+		"nombre": "TIERRA AMARILLA",
+		"longitud": "-69.67137971620",
+		"latitud": "-27.86401719770"
+		},{
+		"nombre": "TILTIL",
+		"longitud": "-70.87621470660",
+		"latitud": "-33.06248051520"
+		},{
+		"nombre": "TIMAUKEL",
+		"longitud": "-69.54128639970",
+		"latitud": "-54.20203788170"
+		},{
+		"nombre": "TIRUA",
+		"longitud": "-73.39455527880",
+		"latitud": "-38.29714305650"
+		},{
+		"nombre": "TOCOPILLA",
+		"longitud": "-70.01431655750",
+		"latitud": "-22.00251295900"
+		},{
+		"nombre": "TOLTEN",
+		"longitud": "-73.06583970580",
+		"latitud": "-39.21698949580"
+		},{
+		"nombre": "TOME",
+		"longitud": "-72.85809966840",
+		"latitud": "-36.61663928930"
+		},{
+		"nombre": "TORRES DEL PAINE",
+		"longitud": "-72.84199200020",
+		"latitud": "-51.05023361920"
+		},{
+		"nombre": "TORTEL",
+		"longitud": "-74.16822560990",
+		"latitud": "-48.02926076520"
+		},{
+		"nombre": "TRAIGUEN",
+		"longitud": "-72.65500499570",
+		"latitud": "-38.24697749170"
+		},{
+		"nombre": "TREGUACO",
+		"longitud": "-72.65970880830",
+		"latitud": "-36.42797703810"
+		},{
+		"nombre": "TUCAPEL",
+		"longitud": "-71.74437663700",
+		"latitud": "-37.22539671830"
+		},{
+		"nombre": "VALDIVIA",
+		"longitud": "-73.16960906940",
+		"latitud": "-39.81857679480"
+		},{
+		"nombre": "VALLENAR",
+		"longitud": "-70.60254220660",
+		"latitud": "-28.59357886620"
+		},{
+		"nombre": "VALPARAISO",
+		"longitud": "-71.57336382830",
+		"latitud": "-33.12957447350"
+		},{
+		"nombre": "VINA DEL MAR",
+		"longitud": "-71.51542315610",
+		"latitud": "-33.02744714170"
+		},{
+		"nombre": "VICHUQUEN",
+		"longitud": "-72.02246355320",
+		"latitud": "-34.84138565460"
+		},{
+		"nombre": "VICTORIA",
+		"longitud": "-72.23351466690",
+		"latitud": "-38.28058029100"
+		},{
+		"nombre": "VICUNA",
+		"longitud": "-70.38261236090",
+		"latitud": "-29.89145746900"
+		},{
+		"nombre": "VILCUN",
+		"longitud": "-72.11650990190",
+		"latitud": "-38.70461714960"
+		},{
+		"nombre": "VILLA ALEGRE",
+		"longitud": "-71.68287301870",
+		"latitud": "-35.68564918270"
+		},{
+		"nombre": "VILLA ALEMANA",
+		"longitud": "-71.33002938790",
+		"latitud": "-33.06767029610"
+		},{
+		"nombre": "VILLARRICA",
+		"longitud": "-72.18285772180",
+		"latitud": "-39.30093755780"
+		},{
+		"nombre": "VITACURA",
+		"longitud": "-70.57259782290",
+		"latitud": "-33.37913701020"
+		},{
+		"nombre": "YERBAS BUENAS",
+		"longitud": "-71.54407336390",
+		"latitud": "-35.68923368640"
+		},{
+		"nombre": "YUMBEL",
+		"longitud": "-72.61600921090",
+		"latitud": "-37.08841271420"
+		},{
+		"nombre": "YUNGAY",
+		"longitud": "-71.93062402190",
+		"latitud": "-37.10450039250"
+		},{
+		"nombre": "ZAPALLAR",
+		"longitud": "-71.33618208120",
+		"latitud": "-32.58746103630"
+		}
+	]
 }

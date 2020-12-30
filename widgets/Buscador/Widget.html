@@ -1,51 +1,44 @@
 <div id="container-coordinate-converter">
-	<div>
-		<table style="width: 100%;">
+	<div id="loading-gif"></div>
+	<div id="div-ingreso-normal">
+		<table class="table" style="width: 100%;font-size: 5px;" cellspacing="0" cellpadding="0" >
 			<tbody>
 				<tr>
-					<td>
+					<td style="width: 50%;">
 						<span class="buscador-subtitulo">Región:</span>
-						<select name="" class="form-control" id="sel-buscador-region">
+						<select name="" class="form-control" id="sel-buscador-region" disabled>
 							<option value="-1">[Seleccione]</option>
 						</select>
-						<br>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						<span class="buscador-subtitulo">Provincia:</span>
-						<select name="" class="form-control" id="sel-buscador-provincia">
-							<option value="-1">[Seleccione]</option>
-						</select>
-					<br>
-					</td>
-				</tr>
-				<tr>
 					<td>
 						<span class="buscador-subtitulo">Comuna:</span>
-						<select name="" class="form-control" id="sel-buscador-comuna">
+						<select name="" class="form-control" id="sel-buscador-comuna" disabled>
 							<option value="-1">[Seleccione]</option>
 						</select>
-					<br>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<span class="buscador-subtitulo">Calle/Vía/Camino:</span>
-						<select name="" class="form-control" id="sel-buscador-calle">
+						<!-- <select name="" class="form-control" id="sel-buscador-calle" disabled>
 							<option value="-1">[Seleccione]</option>
-						</select>
-					<br>
+						</select> -->
+						<input type="text" name="calle" id="input-buscador-calle" class="form-control" placeholder="Escriba el nombre de la calle..." autocomplete="off" disabled>
+					</td>
+					<td>
+						<span class="buscador-subtitulo">Numeración:</span>
+						<input type="text" name="numero" id="input-buscador-numero" class="form-control" placeholder="Escriba el número..." autocomplete="off" disabled>
+						<!-- <select name="" class="form-control" id="sel-buscador-numero" autocomplete="off" disabled>
+							<option value="-1">[Seleccione]</option>
+						</select> -->
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<span class="buscador-subtitulo">Numeración:</span>
-						<select name="" class="form-control" id="sel-buscador-numero">
-							<option value="-1">[Seleccione]</option>
-						</select>
-					<br>
+						<span class="buscador-subtitulo">Unidad vecinal:</span>
+						<input type="text" class="form-control" id="input-unidad-vecinal" name="" placeholder="" readonly="readonly">
 					</td>
+					<td></td>
 				</tr>
 			</tbody>
 			<!-- <tbody>
@@ -55,12 +48,57 @@
 			</tbody> -->
 		</table>
 	</div>
+	<div class="form-check">
+		<input type="checkbox" class="form-check-input" id="chk-sin-direccion">
+		<label class="buscador-subtitulo">No encuentro mi direccion</label><br />
+	</div>
+	<span class="buscador-info-direccion" id="txt-direccion" style="display: inline-block;"></span>
 	<br />
-	<span class="buscador-info-direccion" id="txt-direccion"></span>
-	<span>Unidad vecinal:</span>
-	<span class="buscador-info-direccion" id="txt-uv"></span>
-	<br />
-	<center>
-		<!-- <div tabindex="5" class="jimu-btn" data-dojo-attach-event="onclick:_onBtnGo">Ir</div> -->
-	</center>
+	<div id="div-ingreso-manual" style="display: none; margin-top: 15px;">
+		<table class="table" style="width: 100%;font-size: 5px;" cellspacing="0" cellpadding="0" >
+			<tbody>
+				<tr>
+					<td>
+						<span class="buscador-subtitulo">Ingrese punto en el mapa:</span>
+					</td>
+					<td>
+						<button type="button" id="btn-draw" class="btn btn-outline-primary" data-dojo-attach-event="onclick:_onclickDraw" style="display: block;
+						margin-top: 4px; margin-bottom: 4px;">
+							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+								<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+							</svg>
+						</button>
+						<input type="hidden" name="latitud" id="hidden-latitud">
+						<input type="hidden" name="longitud" id="hidden-longitud">
+						<input type="hidden" name="longitud" id="hidden-unidad-vecinal">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="buscador-subtitulo">Calle/Vía/Camino:</span>
+						<input class="form-control" type="text" name="calle" id="input-calle-ingreso-manual">
+					</td>
+					<td>
+						<span class="buscador-subtitulo">Numeración:</span>
+						<input class="form-control" type="text" name="numero" id="input-numero-ingreso-manual">	
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<center>
+							<div id="div-buscador-loading" style="margin-bottom: 15px; display: none; margin-top: 15px;">
+								<div class="d-flex justify-content-center">
+								  <div class="spinner-border" role="status">
+									<span class="sr-only">Loading...</span>
+								  </div>
+								</div>
+							  </div>
+							<input type="button" id="btn-buscador-enviar" class="map-id btn btn-primary" value="Enviar" data-dojo-attach-event="onclick:_onclickEnviar">
+						</center>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

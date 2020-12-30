@@ -22,22 +22,24 @@
 
 .autocomplete > div:hover:not(.group),
 .autocomplete > div.selected {
-    background: #81ca91;
+    background: #c7c7c7;
     cursor: pointer;
 }
 
 div#_5_panel.jimu-panel.jimu-on-screen-widget-panel.jimu-main-background {
-	width: 450px !important;
-    height: 650px !important;
+	width: 650px !important;
+    height: 500px !important;
 }
 
 .buscador-subtitulo {
     margin-bottom: 9px;
-    float: left;
+    /* float: left; */
     font-size: 15px;
 }
 
 .buscador-info-direccion {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
+    float: left;
+    width: 100%;
 }
