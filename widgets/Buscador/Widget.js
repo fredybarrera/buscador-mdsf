@@ -79,6 +79,7 @@ define([
 				var map = this.map;
 				var config = this.config
 				var getRequest = this.getRequest
+				var putRequest = this.putRequest
 				var getUnidadVecinal = this.getUnidadVecinal
 
 				var gLayer = new GraphicsLayer({'id': 'gLayerDirecciones'});
@@ -238,14 +239,41 @@ define([
 																		if (data.Response.View.length > 0) {
 																			var point;
 																			var label = data.Response.View[0].Result[0].Location.Address.Label;
-																			var region = data.Response.View[0].Result[0].Location.Address.State;
-																			var provincia = data.Response.View[0].Result[0].Location.Address.County;
-																			var comuna = data.Response.View[0].Result[0].Location.Address.City;
+																			var region_here = data.Response.View[0].Result[0].Location.Address.State;
+																			var provincia_here = data.Response.View[0].Result[0].Location.Address.County;
+																			var comuna_here = data.Response.View[0].Result[0].Location.Address.City;
 													
 																			$("#txt-direccion").html('<li>' + label + '</li>')
 																			var lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
 																			var lon = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;	
 																			point = new Point(lon, lat);
+
+																			//Actualizo el x,y de la direccion en el banco de direcciones.
+																			let params = {
+																				"comuna": comuna,
+																				"calle": calle,
+																				"numero": numero,
+																				"x": lon,
+																				"y": lat,
+																				"fuente": "HERE"
+																			};
+																
+																			let query = Object.keys(params)
+																			.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+																			.join('&');
+																	
+																			let url = config.urlBaseApi + config.endPointData + '?' + query;
+
+																			console.log('urlllllllllllll: ', url);
+
+																			putRequest(url).then(
+																				lang.hitch(this, function(data) { 
+																					console.log('response putRequest: ', data);
+																				}),
+																				function(objErr) {
+																					console.log('request failed', objErr)
+																				}
+																			);
 
 																			getUnidadVecinal(config.urlUnidadVecinal, point).then(
 																				lang.hitch(this, function(response) { 
@@ -254,9 +282,9 @@ define([
 																						"lat": lat,
 																						"lon": lon,
 																						'direccion': label,
-																						"region": region,
-																						"provincia": provincia,
-																						"comuna": comuna,
+																						"region": region_here,
+																						"provincia": provincia_here,
+																						"comuna": comuna_here,
 																						"unidad_vecinal": feature['t_uv_nom']
 																					};
 																					$("#input-unidad-vecinal").val(feature['t_uv_nom'])
@@ -377,22 +405,23 @@ define([
 				return deferred.promise;
 			},
 		  
+
 			postRequest: function (url, data) {
 				try{
 				  	var deferred = new Deferred();
 				  	let formData = new FormData();
 				  	formData.append('f', 'json');
-					  formData.append('adds', data);
+					formData.append('adds', data);
 					  
-					  let headers = new Headers()
-					  headers.append("Content-Type", "application/json");
+					let headers = new Headers()
+					headers.append("Content-Type", "application/json");
 		  
 				  	let fetchData = {
 					  	method: 'POST',
 					  	body: JSON.stringify(data),
 					  	headers: headers,
 						redirect: 'follow'
-					  }
+					}
 					  
 		  
 				  	fetch(url, fetchData)
@@ -414,6 +443,33 @@ define([
 				return deferred.promise;
 			},
 
+
+			putRequest: function (url) {
+				try{
+				  	var deferred = new Deferred();
+		  
+				  	let fetchData = {
+					  	method: 'PUT'
+					}
+					  
+				  	fetch(url, fetchData)
+					.then(data => data.text())
+					.then((text) => {
+						var aux = JSON.parse(text);
+						var data = JSON.parse(aux);
+						console.log('responseee: ', data)
+					  	deferred.resolve(data);
+		  
+					}).catch(function (error) {
+					  	console.log('request failed', error)
+					  	deferred.reject();
+					});
+				} catch(err) {
+					console.log('request failed', err)
+					deferred.reject();
+				}
+				return deferred.promise;
+			},
 
 			_onclickEnviar: function (){
 
