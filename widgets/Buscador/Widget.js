@@ -141,7 +141,10 @@ define([
 						lang.hitch(this, function(data) { 
 							let calles = []
 							arrayUtils.forEach(data, function(f) {
-								calles.push({label: f.stname, value: f.stname});
+								if (f.stname !== null)
+								{
+									calles.push({label: f.stname, value: f.stname});
+								}
 							}, this);
 							var input = document.getElementById("input-buscador-calle");
 							autocomplete({
@@ -162,7 +165,10 @@ define([
 										lang.hitch(this, function(data) { 
 											let numeros = []
 											arrayUtils.forEach(data, function(f) {
-												numeros.push({label: f.addnum, value: f.addnum});
+												if (f.addnum !== null)
+												{
+													numeros.push({label: f.addnum, value: f.addnum});
+												}
 											}, this);
 
 											var input = document.getElementById("input-buscador-numero");
@@ -172,7 +178,7 @@ define([
 												minLength: 1,
 												fetch: function(text, update) {
 													text = text.toLowerCase();
-													var suggestions = numeros.filter(n => n.label.toLowerCase().startsWith(text))
+													var suggestions = numeros.filter(n => n.label.toString().toLowerCase().startsWith(text))
 													update(suggestions);
 												},
 												onSelect: function(item) {
