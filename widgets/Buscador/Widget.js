@@ -60,7 +60,9 @@ define([
 		Draw,
 		projection) {
 
-		//To create a widget, you need to derive from BaseWidget.
+		var map, config, postRequest, getRequest, putRequest, getUnidadVecinal, showMessage, gLayer, html_infotemplate, fuente;
+		
+		// To create a widget, you need to derive from BaseWidget.
 		return declare([BaseWidget], {
 			// DemoWidget code goes here
 
@@ -76,25 +78,21 @@ define([
 			
 			startup: function () {
 				this.inherited(arguments);
-				var map = this.map;
-				var config = this.config
-				var getRequest = this.getRequest
-				var putRequest = this.putRequest
-				var getUnidadVecinal = this.getUnidadVecinal
+				map = this.map;
+				config = this.config;
+				getRequest = this.getRequest;
+				putRequest = this.putRequest;
+				postRequest = this.postRequest;
+				getUnidadVecinal = this.getUnidadVecinal;
+				showMessage = this.showMessage;
+				html_infotemplate = this.getInfotemplate();
+				gLayer = new GraphicsLayer({'id': 'gLayerGraphic'});
 
-				var gLayer = new GraphicsLayer({'id': 'gLayerDirecciones'});
 				map.addLayer(gLayer);
-
-				var gLayer = new GraphicsLayer({'id': 'gLayerGraphic'});
-				  map.addLayer(gLayer);
-				  
 				var sms = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CIRCLE).setColor(new Color([255, 0, 0, 0.5]));
-				var html_infotemplate = this.getInfotemplate()
-
-
 				let url = config.urlBaseApi + config.endPointRegiones
 
-				this.getRequest(url).then(
+				getRequest(url).then(
 					lang.hitch(this, function(data) { 
 						let html = '<option value="-1">[Seleccione]</option>'
 						arrayUtils.forEach(data, function(f) {
@@ -109,6 +107,7 @@ define([
 				);	
 
 				$('#sel-buscador-region').change(function() {
+					gLayer.clear();
 					let region = $(this).val();
 					$("#sel-buscador-comuna").prop('disabled', true);
 					$("#input-buscador-calle").prop('disabled', true).val("");
@@ -131,234 +130,270 @@ define([
 				});
 
 				$('#sel-buscador-comuna').change(function() {
+					
 					let comuna = $(this).val();
 					$("#input-buscador-calle").prop('disabled', true).val("");
 					$("#input-buscador-numero").prop('disabled', true).val("");
 					$("#input-unidad-vecinal").val("");
-					let url = config.urlBaseApi + config.endPointCalles + comuna
-					let objComuna = config.centroideComunas.filter((val) => val.nombre === comuna );
-					getRequest(url).then(
-						lang.hitch(this, function(data) { 
-							let calles = []
-							arrayUtils.forEach(data, function(f) {
-								if (f.stname !== null)
-								{
-									calles.push({label: f.stname, value: f.stname});
-								}
-							}, this);
-							var input = document.getElementById("input-buscador-calle");
-							autocomplete({
-								input: input,
-								minLength: 1,
-								fetch: function(text, update) {
-									text = text.toLowerCase();
-									var suggestions = calles.filter(n => n.label.toLowerCase().startsWith(text))
-									update(suggestions);
-								},
-								onSelect: function(item) {
-									input.value = item.label;
-									let calle = item.label;
-									console.log('acaaaaa: ', calle);
-									let comuna = $('#sel-buscador-comuna option:selected').val()
-									let url = config.urlBaseApi + config.endPointNumeros + '?calle=' + calle + '&comuna=' + comuna
-									getRequest(url).then(
-										lang.hitch(this, function(data) { 
-											let numeros = []
-											arrayUtils.forEach(data, function(f) {
-												if (f.addnum !== null)
-												{
-													numeros.push({label: f.addnum, value: f.addnum});
-												}
-											}, this);
+					
+					if(comuna !== '-1')
+					{
+						let url = config.urlBaseApi + config.endPointCalles + comuna
+						let objComuna = config.centroideComunas.filter((val) => val.nombre === comuna );
+						getRequest(url).then(
+							lang.hitch(this, function(data) { 
+								let calles = []
+								arrayUtils.forEach(data, function(f) {
+									if (f.stname !== null)
+									{
+										calles.push({label: f.stname, value: f.stname});
+									}
+								}, this);
+								var input = document.getElementById("input-buscador-calle");
+								autocomplete({
+									input: input,
+									minLength: 1,
+									emptyMsg: "No se encontraron resultados",
+									fetch: function(text, update) {
+										text = text.toLowerCase();
+										var suggestions = calles.filter(n => n.label.toLowerCase().startsWith(text))
+										update(suggestions);
+									},
+									onSelect: function(item) {
+										input.value = item.label;
+										let calle = item.label;
+										let comuna = $('#sel-buscador-comuna option:selected').val();
+										let url = config.urlBaseApi + config.endPointNumeros + '?calle=' + calle + '&comuna=' + comuna
+										getRequest(url).then(
+											lang.hitch(this, function(data) { 
+												let numeros = []
+												arrayUtils.forEach(data, function(f) {
+													if (f.addnum !== null)
+													{
+														numeros.push({label: f.addnum, value: f.addnum});
+													}
+												}, this);
 
-											var input = document.getElementById("input-buscador-numero");
-											$("#input-buscador-numero").prop('disabled', false);
-											autocomplete({
-												input: input,
-												minLength: 1,
-												fetch: function(text, update) {
-													text = text.toLowerCase();
-													var suggestions = numeros.filter(n => n.label.toString().toLowerCase().startsWith(text))
-													update(suggestions);
-												},
-												onSelect: function(item) {
-													console.log('numero: ', input.value);
-													input.value = item.label;
-													let numero = item.label;
-													let url = config.urlBaseApi + config.endPointData + '?numero=' + numero + '&calle=' + calle + '&comuna=' + comuna
+												var input = document.getElementById("input-buscador-numero");
+												autocomplete({
+													input: input,
+													minLength: 1,
+													emptyMsg: "No se encontraron resultados",
+													fetch: function(text, update) {
+														text = text.toLowerCase();
+														var suggestions = numeros.filter(n => n.label.toString().toLowerCase().startsWith(text))
+														update(suggestions);
+													},
+													onSelect: function(item) {
+														var gLayer = map.getLayer("gLayerGraphic");
+														gLayer.clear();
+														input.value = item.label;
+														let numero = item.label;
+														let url = config.urlBaseApi + config.endPointData + '?numero=' + numero + '&calle=' + calle + '&comuna=' + comuna
 
-													console.log('comuna: ', comuna);
-													console.log('calle: ', calle);
-													console.log('url: ', url);
+														// Voy a buscar la ubicación de la direccion al banco de direcciones del MDSF
+														getRequest(url).then(
+															lang.hitch(this, function(response) { 
+																// Si la dirección tiene x,y dentro del maestro, muestro el punto en el mapa
+																// if (false)
+																if (response.length > 0 && response[0].displayx_d != "" && response[0].displayy_d != "")
+																{
+																	var data = response[0]
+																	let x = data.displayx_d.replace(",", ".");
+																	let y = data.displayy_d.replace(",", ".");
+																	point = new Point(parseFloat(x), parseFloat(y));
 
-													// Voy a buscar la ubicación de la direccion al banco de direcciones del MDSF
-													getRequest(url).then(
-														lang.hitch(this, function(response) { 
-															console.log('response: ', response);
-															// Si la dirección tiene x,y dentro del maestro, muestro el punto en el mapa
-															// if (false)
-															if (response.length > 0 && response[0].displayx_d != "" && response[0].displayy_d != "")
-															{
-																var data = response[0]
-																let x = data.displayx_d.replace(",", ".");
-																let y = data.displayy_d.replace(",", ".");
-																point = new Point(parseFloat(x), parseFloat(y));
+																	var attr = {
+																		"lat": y,
+																		"lon": x,
+																		"region": data.t_reg_nom,
+																		"provincia": data.t_prov_nom,
+																		"comuna": data.t_com_nom,
+																		"direccion": data.dir_normalizada,
+																		"unidad_vecinal": data.t_uv_nom
+																	};
+																	let strDireccion = (data.dir_normalizada)?data.dir_normalizada:'';
+																	$("#input-unidad-direccion-normalizada").val(strDireccion);
 
-																var attr = {
-																	"lat": y,
-																	"lon": x,
-																	"region": data.t_reg_nom,
-																	"provincia": data.t_prov_nom,
-																	"comuna": data.t_com_nom,
-																	"direccion": data.dir_normalizada,
-																	"unidad_vecinal": data.t_uv_nom
-																};
-																
-																$("#txt-direccion").html('<li>' + (data.dir_normalizada)?data.dir_normalizada:''  + '</li>')
-
-																$("#input-unidad-vecinal").val(data.t_uv_nom);
-																var infoTemplate = new InfoTemplate("Dirección", html_infotemplate);
-																var graphic = new Graphic(point, sms, attr, infoTemplate);
-																gLayer.add(graphic);
-																map.centerAndZoom(point, 15);
-										
-															}else{
-																// Si la direccion no tiene x,y dentro del banco de direcciones, utilizo la api de here
-																let params = {
-																	'apikey': config.apiKey,
-																	'housenumber': numero,
-																	// 'street': 'asssssssssssss',
-																	'street': calle,
-																	'city': comuna,
-																	'country': 'chl'
-																};
-												
-																let query = Object.keys(params)
-																	.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-																	.join('&');
-												
-																let url = config.urlGeocoder + '?' + query;
-
-																getRequest(url).then(
-																	lang.hitch(this, function(data) { 
-																		console.log('response api here: ', data);
-																		if (data.Response.View.length > 0) {
-																			var point;
-																			var label = data.Response.View[0].Result[0].Location.Address.Label;
-																			var region_here = data.Response.View[0].Result[0].Location.Address.State;
-																			var provincia_here = data.Response.View[0].Result[0].Location.Address.County;
-																			var comuna_here = data.Response.View[0].Result[0].Location.Address.City;
+																	$("#input-unidad-vecinal").val(data.t_uv_nom);
+																	var infoTemplate = new InfoTemplate("Dirección", html_infotemplate);
+																	var graphic = new Graphic(point, sms, attr, infoTemplate);
+																	gLayer.add(graphic);
+																	map.centerAndZoom(point, 15);
+											
+																}else{
+																	// Si la direccion no tiene x,y dentro del banco de direcciones, utilizo la api de here
+																	let params = {
+																		'apikey': config.apiKey,
+																		'housenumber': numero,
+																		// 'street': 'asssssssssssss',
+																		'street': calle,
+																		'city': comuna,
+																		'country': 'chl'
+																	};
 													
-																			$("#txt-direccion").html('<li>' + label + '</li>')
-																			var lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
-																			var lon = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;	
-																			point = new Point(lon, lat);
+																	let query = Object.keys(params)
+																		.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+																		.join('&');
+													
+																	let url = config.urlGeocoder + '?' + query;
 
-																			//Actualizo el x,y de la direccion en el banco de direcciones.
-																			let params = {
-																				"comuna": comuna,
-																				"calle": calle,
-																				"numero": numero,
-																				"x": lon,
-																				"y": lat,
-																				"fuente": "HERE"
-																			};
-																
-																			let query = Object.keys(params)
-																			.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-																			.join('&');
+																	getRequest(url).then(
+																		lang.hitch(this, function(data) { 
+																			if (data.Response.View.length > 0) {
+																				var point;
+																				var label = data.Response.View[0].Result[0].Location.Address.Label;
+																				var region_here = data.Response.View[0].Result[0].Location.Address.State;
+																				var provincia_here = data.Response.View[0].Result[0].Location.Address.County;
+																				var comuna_here = data.Response.View[0].Result[0].Location.Address.City;
+														
+																				$("#input-unidad-direccion-normalizada").val(label);
+																				var lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+																				var lon = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;	
+																				point = new Point(lon, lat);
+
+																				//Actualizo el x,y de la direccion en el banco de direcciones.
+																				let params = {
+																					"comuna": comuna,
+																					"calle": calle,
+																					"numero": numero,
+																					"x": lon,
+																					"y": lat,
+																					"fuente": "HERE"
+																				};
 																	
-																			let url = config.urlBaseApi + config.endPointData + '?' + query;
+																				let query = Object.keys(params)
+																				.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+																				.join('&');
+																		
+																				let url = config.urlBaseApi + config.endPointData + '?' + query;
 
-																			console.log('urlllllllllllll: ', url);
+																				putRequest(url).then(
+																					lang.hitch(this, function(data) { 
+																						console.log('response putRequest: ', data);
+																					}),
+																					function(objErr) {
+																						console.log('request failed', objErr)
+																					}
+																				);
 
-																			putRequest(url).then(
-																				lang.hitch(this, function(data) { 
-																					console.log('response putRequest: ', data);
-																				}),
-																				function(objErr) {
-																					console.log('request failed', objErr)
-																				}
-																			);
+																				getUnidadVecinal(config.urlUnidadVecinal, point).then(
+																					lang.hitch(this, function(response) { 
+																						feature = response.featureSet.features[0].attributes
+																						var attr = {
+																							"lat": lat,
+																							"lon": lon,
+																							'direccion': label,
+																							"region": region_here,
+																							"provincia": provincia_here,
+																							"comuna": comuna_here,
+																							"unidad_vecinal": feature['t_uv_nom']
+																						};
+																						$("#input-unidad-vecinal").val(feature['t_uv_nom'])
+																						var infoTemplate = new InfoTemplate("Dirección", html_infotemplate);
+																						var graphic = new Graphic(point, sms, attr, infoTemplate);
+																						gLayer.add(graphic);
+																						map.centerAndZoom(point, 15);
+																					}),
+																					function(objErr) {
+																						console.log('request failed', objErr)
+																					}
+																				);
 
-																			getUnidadVecinal(config.urlUnidadVecinal, point).then(
-																				lang.hitch(this, function(response) { 
-																					feature = response.featureSet.features[0].attributes
-																					var attr = {
-																						"lat": lat,
-																						"lon": lon,
-																						'direccion': label,
-																						"region": region_here,
-																						"provincia": provincia_here,
-																						"comuna": comuna_here,
-																						"unidad_vecinal": feature['t_uv_nom']
-																					};
-																					$("#input-unidad-vecinal").val(feature['t_uv_nom'])
-																					var infoTemplate = new InfoTemplate("Dirección", html_infotemplate);
-																					var graphic = new Graphic(point, sms, attr, infoTemplate);
-																					gLayer.add(graphic);
-																					map.centerAndZoom(point, 15);
-																				}),
-																				function(objErr) {
-																					console.log('request failed', objErr)
-																				}
-																			);
+																			}else{
 
-																		}else{
-																			// No se encontró la dirección.
-																			$("#txt-direccion").html('<li style="color: red; margin-bottom: 20px;">No hemos podido encontrar tu dirección, por favor completa los siguiente campos e ingresa la ubicación en el mapa.</li>')
-																			$("#div-ingreso-manual").show();
-																			$("#div-ingreso-normal").hide();
+																				let mensaje = `
+																					<li style="color: red; margin-bottom: 20px;">
+																					No hemos podido encontrar tu dirección, por favor ingresa la ubicación en el mapa y luego presiona el botón "Guardar"
+																					</li>`;
+
+																				$("#buscador-manual-uv").html('');
+																				$("#buscador-manual-direccion-normalizada").html('');
+
+																				$("#div-buscador-loading").hide();
+																				$("#txt-direccion").html(mensaje);
+																				$("#tr-buscador-ingresar-punto").show();
+																				$("#btn-buscador-manual-guardar").show();
+
+																				$("#div-ingreso-manual").show();
+																				$("#div-ingreso-normal").hide();
+																				$("#div-buscar-direccion-here").hide();
+																				let region = $('#sel-buscador-region option:selected').val();
+																				let comuna = $('#sel-buscador-comuna option:selected').val();
+																				let srtRegion = (region !== "-1")?region:'';
+																				let srtComuna = (comuna !== "-1")?comuna:'';
+																				$("#buscador-manual-region").html('Región: <b>' + srtRegion + '</b>');
+																				$("#buscador-manual-comuna").html('Comuna: <b>' + srtComuna + '</b>');
+
+																				let calle = $("#input-buscador-calle").val();
+																				let numero = $("#input-buscador-numero").val();
+
+																				$("#input-calle-ingreso-manual").val(calle);
+																				$("#input-numero-ingreso-manual").val(numero);
+
+																				$("#chk-sin-direccion").prop('checked', true);
+																			}
+																		}),
+																		function(objErr) {
+																			console.log('request failed', objErr)
 																		}
-																	}),
-																	function(objErr) {
-																		console.log('request failed', objErr)
-																	}
-																);
+																	);
+																}
+															}),
+															function(objErr) {
+																console.log('request failed', objErr)
 															}
-														}),
-														function(objErr) {
-															console.log('request failed', objErr)
-														}
-													);
-												}
-											});
-										}),
-										function(objErr) {
-											console.log('request failed', objErr)
-										}
-									);
-								}
-							});
+														);
+													}
+												});
+											}),
+											function(objErr) {
+												console.log('request failed', objErr)
+											}
+										);
+									}
+								});
 
-							$("#input-buscador-calle").prop('disabled', false);
+								$("#input-buscador-calle").prop('disabled', false);
+								$("#input-buscador-numero").prop('disabled', false);
 
-							console.log('objComuna: ', objComuna)
-							point = new Point(parseFloat(objComuna[0].longitud), parseFloat(objComuna[0].latitud));
-							console.log('point: ', point);
-							map.centerAndZoom(point, 12);
-						}),
-						function(objErr) {
-							console.log('request failed', objErr)
-						}
-					);
+								point = new Point(parseFloat(objComuna[0].longitud), parseFloat(objComuna[0].latitud));
+								map.centerAndZoom(point, 12);
+							}),
+							function(objErr) {
+								console.log('request failed', objErr)
+							}
+						);
+					}
 				});
 
-
 				$("#chk-sin-direccion").on("click", function(){
+					$("#txt-direccion").html('');
 					if($(this).is(':checked'))
 					{
 						$("#div-ingreso-manual").show();
 						$("#div-ingreso-normal").hide();
-						$("#txt-direccion").hide();
+						$("#div-buscar-direccion-here").hide();
+						let region = $('#sel-buscador-region option:selected').val();
+						let comuna = $('#sel-buscador-comuna option:selected').val();
+						let srtRegion = (region !== "-1")?region:'';
+						let srtComuna = (comuna !== "-1")?comuna:'';
+						$("#buscador-manual-region").html('Región: <b>' + srtRegion + '</b>');
+						$("#buscador-manual-comuna").html('Comuna: <b>' + srtComuna + '</b>');
+
+						let calle = $("#input-buscador-calle").val();
+						let numero = $("#input-buscador-numero").val();
+
+						$("#input-calle-ingreso-manual").val(calle);
+						$("#input-numero-ingreso-manual").val(numero);
+
 					} else {
 						$("#div-ingreso-manual").hide();
 						$("#div-ingreso-normal").show();
-						$("#txt-direccion").show();
+						$("#div-buscar-direccion-here").show();
 					}
 				});
 			},
-
 
 			getUnidadVecinal: function (url, point) {
 				try{
@@ -371,7 +406,6 @@ define([
 					query.returnGeometry = true;
 					queryTask.execute(query);
 					queryTask.on("complete", function(response){
-						console.log('complete response: ', response)
 						deferred.resolve(response);
 					});
 					queryTask.on("error", function(error){
@@ -384,7 +418,6 @@ define([
 				}
 				return deferred.promise;
 			},
-
 
 			getRequest: function (url) {
 				try{
@@ -411,7 +444,6 @@ define([
 				return deferred.promise;
 			},
 		  
-
 			postRequest: function (url, data) {
 				try{
 				  	var deferred = new Deferred();
@@ -429,13 +461,11 @@ define([
 						redirect: 'follow'
 					}
 					  
-		  
 				  	fetch(url, fetchData)
 					.then(data => data.text())
 					.then((text) => {
 						var aux = JSON.parse(text);
 						var data = JSON.parse(aux);
-						console.log('responseee: ', data)
 					  	deferred.resolve(data);
 		  
 					}).catch(function (error) {
@@ -448,7 +478,6 @@ define([
 				}
 				return deferred.promise;
 			},
-
 
 			putRequest: function (url) {
 				try{
@@ -463,7 +492,6 @@ define([
 					.then((text) => {
 						var aux = JSON.parse(text);
 						var data = JSON.parse(aux);
-						console.log('responseee: ', data)
 					  	deferred.resolve(data);
 		  
 					}).catch(function (error) {
@@ -477,7 +505,7 @@ define([
 				return deferred.promise;
 			},
 
-			_onclickEnviar: function (){
+			_onclickBuscarManual: function (){
 
 				if (!projection.isSupported()) {
 					console.error("projection is not supported");
@@ -485,22 +513,133 @@ define([
 					return;
 				}
 
-				var showMessage = this.showMessage
-				var postRequest = this.postRequest
-				var config = this.config
-				var getUnidadVecinal = this.getUnidadVecinal
+				gLayer.clear();
 
+				$("#txt-direccion").html('');
+				$("#btn-buscador-manual-guardar").hide();
+
+				let calle = $('#input-calle-ingreso-manual').val();
+				let numero = $('#input-numero-ingreso-manual').val();
+				let comuna = $('#sel-buscador-comuna option:selected').val();
+				
+				if(calle.trim() !== "" && comuna !== '-1')
+				{
+					$("#div-buscador-loading").show();
+
+					let params = {
+						'apikey': config.apiKey,
+						'housenumber': numero,
+						// 'street': 'asssssssssssss',
+						'street': calle,
+						'city': comuna,
+						'country': 'chl'
+					};
+	
+					let query = Object.keys(params)
+						.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+						.join('&');
+	
+					let url = config.urlGeocoder + '?' + query;
+
+					getRequest(url).then(
+						lang.hitch(this, function(data) { 
+							if (data.Response.View.length > 0) {
+								fuente = 'HERE';
+								var point;
+								var label = data.Response.View[0].Result[0].Location.Address.Label;
+								var region_here = data.Response.View[0].Result[0].Location.Address.State;
+								var provincia_here = data.Response.View[0].Result[0].Location.Address.County;
+								var comuna_here = data.Response.View[0].Result[0].Location.Address.City;
+		
+								var lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+								var lon = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;	
+								point = new Point(lon, lat);
+								var sms = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CIRCLE).setColor(new Color([255, 0, 0, 0.5]));
+
+								getUnidadVecinal(config.urlUnidadVecinal, point).then(
+									lang.hitch(this, function(response) { 
+										if(response.featureSet.features.length > 0) 
+										{
+											feature = response.featureSet.features[0].attributes
+
+											var attr = {
+												"lat": lat,
+												"lon": lon,
+												'direccion': label,
+												"region": region_here,
+												"provincia": provincia_here,
+												"comuna": comuna_here,
+												"unidad_vecinal": feature['t_uv_nom']
+											};
+	
+											var infoTemplate = new InfoTemplate("Dirección", html_infotemplate);
+											var graphic = new Graphic(point, sms, attr, infoTemplate);
+											gLayer.add(graphic);
+											map.centerAndZoom(point, 15);
+
+											$("#buscador-manual-uv").html('Unidad vecinal: <b>' + feature.t_uv_nom + '</b>');
+											$("#buscador-manual-direccion-normalizada").html('Dirección normalizada: <b>' + label + '</b>');
+											$("#buscador-manual-region").html('Región: <b>' + feature.t_reg_nom + '</b>');
+											$("#buscador-manual-comuna").html('Comuna: <b>' + feature.t_com_nom + '</b>');
+
+											$("#btn-buscador-manual-guardar").show();
+											$("#div-buscador-loading").hide();
+											
+										}else {
+											$("#div-buscador-loading").hide();
+											$("#btn-buscador-manual-buscar").show();
+											showMessage('No se ha podido identificar la unidad vecinal, intente ubicar el punto en otro lugar.')
+										}
+									}),
+									function(objErr) {
+										console.log('request failed', objErr)
+									}
+								);
+
+							}else{
+								// No se encontró la dirección.
+								let mensaje = `
+									<li style="color: red; margin-bottom: 20px;">
+									No hemos podido encontrar tu dirección, por favor ingresa la ubicación en el mapa y luego presiona el botón "Guardar"
+									</li>`;
+
+								$("#buscador-manual-uv").html('');
+								$("#buscador-manual-direccion-normalizada").html('');
+
+								$("#div-buscador-loading").hide();
+								$("#txt-direccion").html(mensaje);
+								$("#tr-buscador-ingresar-punto").show();
+								$("#btn-buscador-manual-guardar").show();
+								fuente = 'WEB';
+							}
+						}),
+						function(objErr) {
+							console.log('request failed', objErr)
+						}
+					);
+
+				}else{
+					showMessage('Debe ingresar un nombre de calle y seleccionar una comuna.')
+				}
+			},
+
+			_onclickGuardar: function (){
+
+				if (!projection.isSupported()) {
+					console.error("projection is not supported");
+					showMessage('Hprojection is not supported.')
+					return;
+				}
+			
 				let str_calle = $('#input-calle-ingreso-manual').val();
 				let str_numero = $('#input-numero-ingreso-manual').val();
 
-				if(str_calle.trim() !== "" && str_numero.trim() !== "")
+				if(str_calle.trim() !== "")
 				{
-					var gLayer = this.map.getLayer("gLayerGraphic");
-
 					if (gLayer.graphics.length > 0)
 					{
 						$("#div-buscador-loading").show();
-						$("#btn-buscador-enviar").hide();
+						$("#btn-buscador-manual-guardar").hide();
 
 						pt = gLayer.graphics[0];
 						point_aux = new Point(pt.geometry);
@@ -508,8 +647,6 @@ define([
 						
 						projection.load().then(function () {
 							var point = projection.project(point_aux, outSpatialReferenceGeo);
-							console.log('point: ', point);
-							console.log('point_aux: ', point_aux);
 
 							let displayx_d = point.x
 							let displayy_d = point.y
@@ -533,7 +670,7 @@ define([
 											"Uv_carto": feature.uv_carto,
 											"Addnum": str_numero,
 											"Stname": str_calle.trim().toUpperCase(),
-											"Fuente": "WEB",
+											"Fuente": fuente,
 										}
 
 										let url = config.urlBaseApi + config.endPointData
@@ -541,40 +678,47 @@ define([
 										postRequest(url, data).then(
 											lang.hitch(this, function(objRes) { 
 												$("#div-buscador-loading").hide();
-												$("#btn-buscador-enviar").show();
+												$("#btn-buscador-manual-guardar").hide();
+												$("#btn-buscador-manual-buscar").show();
+
+												$("#buscador-manual-uv").html('');
+												$("#buscador-manual-direccion-normalizada").html('');
+
+												$("#txt-direccion").html('');
+												$("#tr-buscador-ingresar-punto").hide();
+
+												gLayer.clear();
 												showMessage(objRes.mensaje);
 											}),
 											function(objErr) {
 												console.log('request failed', objErr)
 												$("#div-buscador-loading").hide();
-												$("#btn-buscador-enviar").show();
+												$("#btn-buscador-manual-guardar").show();
 												showMessage('Hubo un error al intentar guardar el registro, favor intentar nuevamente.')
 											}
 										)
 										
 									}else {
 										$("#div-buscador-loading").hide();
-										$("#btn-buscador-enviar").show();
+										$("#btn-buscador-manual-guardar").show();
 										showMessage('No se ha podido identificar la unidad vecinal, intente ubicar el punto en otro lugar.')
 									}
 								}),
 								function(objErr) {
 									console.log('request failed', objErr)
 									$("#div-buscador-loading").hide();
-									$("#btn-buscador-enviar").show();
+									$("#btn-buscador-manual-guardar").show();
 									showMessage('Ha ocurrido un error al intentar obtener la unidad vecinal de la dirección, favor intentar nuevamente.')
 								}
 							);
 						});
-						
-						
 
 					}else{
 						showMessage('Debe ingresar la ubicación en el mapa.')
 					}
 
 				}else{
-					showMessage('Debe ingresar un nombre de calle y numeración.')
+					showMessage('Debe ingresar un nombre de calle.')
 				}
 			},
 
@@ -615,7 +759,7 @@ define([
 			},
 
 			_onclickDraw: function () {
-				var gLayer = this.map.getLayer("gLayerGraphic");
+				// var gLayer = this.map.getLayer("gLayerGraphic");
 				gLayer.clear();
 				$("#btn-draw").addClass('active');
 				this.map.disableMapNavigation();
@@ -626,24 +770,14 @@ define([
 
 			addGraphic: function (tb, evt) {
 				var sms = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CIRCLE).setColor(new Color([255, 0, 0, 0.5]));
-				var gLayer = this.map.getLayer("gLayerGraphic");
+				// var gLayer = this.map.getLayer("gLayerGraphic");
 				var graphic = new Graphic(evt.geometry, sms);
-				console.log('evt.geometry: ', evt.geometry);
 				$("#hidden-latitud").val(evt.geometry.y)
 				$("#hidden-longitud").val(evt.geometry.x)
 				gLayer.add(graphic);
 				$("#btn-draw").removeClass('active');
 				tb.deactivate();
 				this.map.enableMapNavigation();
-			},
-
-
-			_filterFunctionv2: function () {
-				console.log('acaaaaaaa');
-			},
-			
-			filterFunction: function () {
-				console.log('acaaaaaaa 222');
 			},
 
 			onOpen: function () {
@@ -653,13 +787,14 @@ define([
 			onClose: function () {
 				console.log('onClose');
 				$("#txt-direccion").html('');
+				
+				$("#input-unidad-direccion-normalizada").val('');
+				$("#input-unidad-vecinal").val('');
+				
 				$("#calle").val('');
 				$("#numero").val('');
 				$("#comuna").val('');
-				var gLayer = this.map.getLayer("gLayerDirecciones");
-				gLayer.clear();
 
-				var gLayer = this.map.getLayer("gLayerGraphic");
 				gLayer.clear();
 
 				$("#div-ingreso-normal").show();

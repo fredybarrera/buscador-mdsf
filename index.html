@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
   <!--[if IE 8]>
     <link rel="stylesheet" type="text/css"  href="jimu.js/css/jimu-ie.css" />
-  <![endif]-->
-  <style type="text/css">
+    <![endif]-->
+    <style type="text/css">
     * {
       box-sizing: border-box;
     }
@@ -41,7 +41,7 @@
       height: 100%;
       position: absolute;
     }
-  </style>
+    </style>
   <link rel="stylesheet" type="text/css" href="configs/loading/loading.css" />
   <script>
     /*******************************
@@ -50,57 +50,58 @@
      ********************************/
     // var progress;
     // function loadingCallback(url, i, count) {
-    // 	var loading = document.getElementById('main-loading-bar');
-    // 	loading.setAttribute('title', url);
-    //   if(!progress){
-    //     progress = document.createElement('div');
-    //     progress.setAttribute('class', 'loading-progress');
-    //     loading.appendChild(progress);
-    //   }
-    //   progress.style.width = (((i - 1)/count) * 100) + '%';
-    // }
-  </script>
+      // 	var loading = document.getElementById('main-loading-bar');
+      // 	loading.setAttribute('title', url);
+      //   if(!progress){
+        //     progress = document.createElement('div');
+        //     progress.setAttribute('class', 'loading-progress');
+        //     loading.appendChild(progress);
+        //   }
+        //   progress.style.width = (((i - 1)/count) * 100) + '%';
+        // }
+        </script>
 </head>
 
 <body class="claro jimu-main-font">
-
+  
   <div id="main-loading">
-
+    
     <!-- This is section you can modify to customize the loading page -->
     <div id="app-loading"></div>
     <div id="loading-gif"></div>
-
+    
     <!-- //////////////////    END    ////////////////////////////// -->
     <!--[if IE 8]>
-    <div id="ie-note" style="display:none;">
-      <div class="hint-title">Error</div>
-      <div class="hint-img">Your browser is currently not supported.</div>
-      <p class="hint-text">
-        <span>
-          Please note that creating presentations is not supported in Internet Explorer versions 6, 7.
-        </span>
-        <br>
-        <span>
-          We recommend upgrading to the latest Internet Explorer, Google Chrome, or Firefox.
-        </span>
-        <br>
-        <span>
-          If you are using IE 8 or later, make sure you turn off "Compatibility View".
-        </span>
-      </p>
+      <div id="ie-note" style="display:none;">
+        <div class="hint-title">Error</div>
+        <div class="hint-img">Your browser is currently not supported.</div>
+        <p class="hint-text">
+          <span>
+            Please note that creating presentations is not supported in Internet Explorer versions 6, 7.
+          </span>
+          <br>
+          <span>
+            We recommend upgrading to the latest Internet Explorer, Google Chrome, or Firefox.
+          </span>
+          <br>
+          <span>
+            If you are using IE 8 or later, make sure you turn off "Compatibility View".
+          </span>
+        </p>
+      </div>
+      <![endif]-->
     </div>
-    <![endif]-->
-  </div>
-  <div id="main-page" role="application">
-    <div class="trapLinkNode" tabindex="0"></div>
-    <div id="jimu-layout-manager"></div>
-    <div id="skipContainer"></div>
-    <div class="trapLinkNode" tabindex="0" aria-label="press tab-key again to get away from the current app, press shift&tab-key to focus on skipLinks"></div>
-  </div>
-
-  <script src="env.js"></script>
-  <script type="text/javascript" src="simpleLoader.js"></script>
-  <script type="text/javascript" src="init.js"></script>
-</body>
-
-</html>
+    <div id="main-page" role="application">
+      <div class="trapLinkNode" tabindex="0"></div>
+      <div id="jimu-layout-manager"></div>
+      <div id="skipContainer"></div>
+      <div class="trapLinkNode" tabindex="0" aria-label="press tab-key again to get away from the current app, press shift&tab-key to focus on skipLinks"></div>
+    </div>
+    
+    <script src="env.js"></script>
+    <script type="text/javascript" src="simpleLoader.js"></script>
+    <script type="text/javascript" src="init.js"></script>
+    <script src="https://use.fontawesome.com/b4b6563db4.js"></script>
+  </body>
+  
+  </html>
