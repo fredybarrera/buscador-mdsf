@@ -787,6 +787,8 @@ define([
 			onClose: function () {
 				console.log('onClose');
 				$("#txt-direccion").html('');
+
+				$("#sel-buscador-region").val("-1").change();
 				
 				$("#input-unidad-direccion-normalizada").val('');
 				$("#input-unidad-vecinal").val('');
